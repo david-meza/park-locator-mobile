@@ -86,7 +86,7 @@ angular.module('parkLocator', ['ionic', 'ui.bootstrap', 'uiGmapgoogle-maps', 'fl
   .config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/search');
 
 
       $stateProvider
@@ -103,25 +103,35 @@ angular.module('parkLocator', ['ionic', 'ui.bootstrap', 'uiGmapgoogle-maps', 'fl
           views: {
             'tab-search': {
               templateUrl: 'templates/tab-search.html',
-              controller: 'SearchCtrl'
+              // controller: 'SearchCtrl'
             }
           }
         })
 
-        .state('home', {
-          url: '/',
+        .state('tab.location', {
+          url: 'location',
           views: {
-
-            'navbar': {
-              templateUrl: 'templates/partials/navbar.html'
-            },
-
-            '': {
-              templateUrl: 'templates/main.html'
+            'tab-search': {
+              templateUrl: 'templates/partials/set-location.html',
+              // controller: 'SearchCtrl'
             }
-
           }
         })
+
+        // .state('home', {
+        //   url: '/',
+        //   views: {
+
+        //     'navbar': {
+        //       templateUrl: 'templates/partials/navbar.html'
+        //     },
+
+        //     '': {
+        //       templateUrl: 'templates/main.html'
+        //     }
+
+        //   }
+        // })
 
         .state('home.park', {
           url: ':name',
