@@ -1,0 +1,93 @@
+<div id="map-canvas">
+
+
+  <div id="searchbox-container">
+    <i class = "fa fa-search icon-search"></i>
+  </div>
+
+  <ui-gmap-google-map center='map.location.coords'
+                      zoom='map.zoom'
+                      options = 'map.options'
+                      dragging='map.dragging'
+                      refresh='map.refresh'
+                      pan='map.pan'
+                      events = 'map.events'
+                      control = 'map.control' >
+
+
+    <ui-gmap-search-box template="map.searchbox.template"
+                        events="map.searchbox.events"
+                        options = "map.searchbox.options"
+                        parentdiv = "'searchbox-container'">
+    </ui-gmap-search-box>
+
+
+    <ui-gmap-marker idKey='map.myLocationMarker.id'
+                    coords='map.myLocationMarker.coords'
+                    options = "map.myLocationMarker.options">
+    </ui-gmap-marker>
+
+    <ui-gmap-markers  models="map.parkMarkers.content"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="onMarkerClicked()"
+                      type = "map.markersConfig.type"
+                      typeOptions = "map.markersConfig.typeOptions"
+                      typeEvents = "map.markersConfig.typeEvents"
+                      modelsbyref="true"
+                      fit = "true"
+                      options="'options'"
+                      events="map.parkMarkerEvents">
+
+
+        <ui-gmap-windows  isIconVisibleOnClick = "true"
+                          show="'showWindow'"
+                          closeClick="'closeClick'" ng-cloak>
+            
+            <div>
+              <h5> {{ parks.currentPark.name }} </h5>
+              <p> {{ parks.currentPark.address }} </p>
+              <p> {{ parks.currentPark.phone }}</p>
+              <!-- <img  style="height: 55px; width: 55px; float: right;" 
+                    ng-src="http://maps.raleighnc.gov/parklocator/images/photos/{{ parks.currentPark.name }}.jpg"
+                    fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"> -->
+              <a scroll-to="panels-section">More Info</a>
+             <!--  <ul>
+                <li ng-class="{ 'text-success': parks.currentPark.artscenter, 'text-danger': !parks.currentPark.artscenter }">{{ parks.currentPark.artscenter ? 'Arts Center' : 'No arts center' }}</li>
+              </ul> -->
+            </div>
+
+        </ui-gmap-windows>
+
+    </ui-gmap-markers>
+
+
+
+    <ui-gmap-markers  models="activities.markers"
+                      coords="'self'"
+                      icon="activities.markersConfig.icon"
+                      click="onMarkerClicked()"
+                      type = "activities.markersConfig.type"
+                      typeOptions = "activities.markersConfig.typeOptions"
+                      typeEvents = "activities.markersConfig.typeEvents"
+                      control = "activities.markersConfig.control"
+                      options = "activities.markersConfig.options"
+                      modelsbyref = "true">
+    </ui-gmap-markers>
+
+
+
+    <ui-gmap-window show="activityWindow.show" 
+                    coords="activityWindow.coords"
+                    control = "activityWindow.control" 
+                    options="activityWindow.options" 
+                    closeclick="activityWindow.closeclick"
+                    templateurl = "activityWindow.templateUrl"
+                    templateparameter = "activityWindow.templateParameter"
+                    ng-cloak>
+    </ui-gmap-window>
+
+
+  </ui-gmap-google-map>
+    
+</div>
