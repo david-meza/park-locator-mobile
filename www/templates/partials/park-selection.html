@@ -1,0 +1,51 @@
+<ion-view view-title="Select a Park">
+  <ion-content>  
+
+		<div class="list list-inset">
+		  <label class="item item-input">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input  type="search"
+                id = "searchParkName"
+                ng-model="parkSelected"
+                placeholder = "Park Name"
+                typeahead-no-results = "noResults"
+                typeahead-on-select = "centerToPark($item, $model, $label)"
+                typeahead-select-on-exact = "true"
+                uib-typeahead="park as park.name for park in parks.content | filter:$viewValue | limitTo:8"
+                class="">
+		  </label>
+
+		  <div ng-show="noResults">
+        <br>
+        <i class="glyphicon glyphicon-remove"></i> No Parks With This Name
+      </div>
+
+		  <br>
+
+			<p  class = "pull-right text-total-results" 
+	        ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">
+	        Number of Parks: {{ parks.content.length }}
+	    </p>
+
+	    <div class = "panel-scrollable">
+
+	      <ul id = "park-list">
+	        <li ng-repeat="park in parks.content | filter: { name: parkSelected.name } | orderBy: nearestPark | limitTo: parksLimit as filteredParks ">
+	          <a  ng-click="centerToPark(park)" 
+	              scroll-to="map-canvas">
+	            <i class = "glyphicon glyphicon-tree-deciduous"></i> {{ park.name }}
+	          </a>
+	        </li>          
+	      </ul>
+
+	      <p class="font-p-sm">
+	        Listing the nearest {{ parksLimit }} parks. <a ng-click="showAll()" ng-show="parksLimit < parks.content.length && !parkSelected.name"> List all</a>
+	      </p>
+	    
+	    </div>
+		  
+		</div>
+
+
+  </ion-content>
+</ion-view>

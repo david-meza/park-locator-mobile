@@ -1,0 +1,71 @@
+<ion-view view-title="Filter by Activity">
+  <ion-content>  
+
+		<div class="list list-inset">
+		  <label class="item item-input">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input  type="text"
+                id = "searchActivityName"
+                ng-model="activitySelected"
+                placeholder = "Pool"
+                typeahead-no-results = "noActivitiesResults"
+                typeahead-on-select = "addToSelected($item, $model, $label)"
+                typeahead-select-on-exact = "true"
+                uib-typeahead="activity as activity.name for activity in amenities.uniques | filter:$viewValue | limitTo:8"
+                class="form-control">
+		  </label>
+
+		  <div ng-show="noActivitiesResults">
+        <br>
+        <i class="glyphicon glyphicon-remove"></i> No activities matched your search.
+      </div>
+
+		  <br>
+
+			<p  class = "pull-right text-total-results" 
+	        ng-class="{ 'text-info': parks.content.length > 0, 'text-danger': parks.content.length <= 0 }">
+	        Number of Parks: {{ parks.content.length }}
+	    </p>
+
+	    <div class = "panel-scrollable">
+
+	      <div ng-show="selectedActivities.current.length === 0">
+	        <button class="btn btn-sm btn-info pull-right" ng-click = "goToPanel('second', 'third')">Skip Step</button>
+	      </div>
+
+	      <div ng-show="selectedActivities.current.length > 0">
+
+
+	        <h5>Selected (parks with all) </h5>
+
+	        <ul id = "selected-amenities-list">
+	          <li ng-repeat="amenity in selectedActivities.current | orderBy: 'name'">
+	            <p ng-mouseenter="amenityHover = true" ng-mouseleave="amenityHover = false">
+	              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}
+	              <a ng-click="removeSelected(amenity)">
+	                <i  class="pull-right glyphicon glyphicon-ok"
+	                    ng-class="{ 'glyphicon-ok': !amenityHover, 'glyphicon-remove': amenityHover }"></i>
+	              </a>
+	            </p>
+	          </li>
+	        </ul>
+	      </div>
+
+	      <div>
+	        <h5>Not Selected</h5>
+
+	        <ul id = "amenities-list">
+	          <li ng-repeat="amenity in amenities.uniques | orderBy: 'name'">
+	            <a ng-click="addToSelected(amenity)">
+	              <img class = "activity-img" ng-src="data:image/png;base64,{{amenity.imageDataSm || amenity.imageData }}" /> {{ amenity.name }}
+	            </a>
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+		  
+		</div>
+
+
+  </ion-content>
+</ion-view>

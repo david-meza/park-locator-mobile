@@ -1,65 +1,3 @@
-// .config(function($stateProvider, $urlRouterProvider) {
-
-//   // Ionic uses AngularUI Router which uses the concept of states
-//   // Learn more here: https://github.com/angular-ui/ui-router
-//   // Set up the various states which the app can be in.
-//   // Each state's controller can be found in controllers.js
-//   $stateProvider
-
-  // setup an abstract state for the tabs directive
-  //   .state('tab', {
-  //   url: '/tab',
-  //   abstract: true,
-  //   templateUrl: 'templates/tabs.html'
-  // })
-
-//   // Each tab has its own nav history stack:
-
-//   .state('tab.dash', {
-//     url: '/dash',
-//     views: {
-//       'tab-dash': {
-//         templateUrl: 'templates/tab-dash.html',
-//         controller: 'DashCtrl'
-//       }
-//     }
-//   })
-
-//   .state('tab.chats', {
-//       url: '/chats',
-//       views: {
-//         'tab-chats': {
-//           templateUrl: 'templates/tab-chats.html',
-//           controller: 'ChatsCtrl'
-//         }
-//       }
-//     })
-//     .state('tab.chat-detail', {
-//       url: '/chats/:chatId',
-//       views: {
-//         'tab-chats': {
-//           templateUrl: 'templates/chat-detail.html',
-//           controller: 'ChatDetailCtrl'
-//         }
-//       }
-//     })
-
-  // .state('tab.account', {
-  //   url: '/account',
-  //   views: {
-  //     'tab-account': {
-  //       templateUrl: 'templates/tab-account.html',
-  //       controller: 'AccountCtrl'
-  //     }
-  //   }
-  // });
-
-//   // if none of the above states are matched, use this as the fallback
-//   $urlRouterProvider.otherwise('/tab/dash');
-
-// });
-
-
 'use strict';
 
 angular.module('parkLocator', ['ionic', 'ui.bootstrap', 'uiGmapgoogle-maps', 'flash', 'smoothScroll', 'dcbImgFallback'])
@@ -103,7 +41,7 @@ angular.module('parkLocator', ['ionic', 'ui.bootstrap', 'uiGmapgoogle-maps', 'fl
           views: {
             'tab-search': {
               templateUrl: 'templates/tab-search.html',
-              // controller: 'SearchCtrl'
+              controller: 'searchCtrl'
             }
           }
         })
@@ -113,34 +51,48 @@ angular.module('parkLocator', ['ionic', 'ui.bootstrap', 'uiGmapgoogle-maps', 'fl
           views: {
             'tab-search': {
               templateUrl: 'templates/partials/set-location.html',
-              // controller: 'SearchCtrl'
+              controller: 'setLocationCtrl'
             }
           }
         })
 
-        // .state('home', {
-        //   url: '/',
-        //   views: {
+        .state('tab.activityFilter', {
+          url: 'activity-filter',
+          views: {
+            'tab-search': {
+              templateUrl: 'templates/partials/activity-filter.html',
+              controller: 'activityFilterCtrl'
+            }
+          }
+        })
 
-        //     'navbar': {
-        //       templateUrl: 'templates/partials/navbar.html'
-        //     },
+        .state('tab.parkSelection', {
+          url: 'park-selection',
+          views: {
+            'tab-search': {
+              templateUrl: 'templates/partials/park-selection.html',
+              controller: 'parkSelectionCtrl'
+            }
+          }
+        })
+        
+        .state('tab.map', {
+          url: 'map',
+          views: {
+            'tab-map': {
+              templateUrl: 'templates/tab-map.html',
+            }
+          }
+        })
 
-        //     '': {
-        //       templateUrl: 'templates/main.html'
-        //     }
-
-        //   }
-        // })
-
-        .state('home.park', {
+        .state('tab.park', {
           url: ':name',
           templateUrl: 'templates/park-information.html',
           controller: 'parkCtrl'
 
         })
 
-        .state('home.park.section', {
+        .state('tab.park.section', {
           url: '/:sectionName',
           templateUrl: 'templates/course-section.html',
           controller: 'sectionCtrl'
@@ -152,11 +104,11 @@ angular.module('parkLocator', ['ionic', 'ui.bootstrap', 'uiGmapgoogle-maps', 'fl
     $ionicPlatform.ready( function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
-      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        cordova.plugins.Keyboard.disableScroll(true);
+      // if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      //   cordova.plugins.Keyboard.disableScroll(true);
 
-      }
+      // }
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();

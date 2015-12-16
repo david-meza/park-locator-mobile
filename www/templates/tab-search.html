@@ -6,16 +6,16 @@
 		  <a class="item item-icon-left item-icon-right" href="#/location">
 		    <i class="icon ion-ios-location"></i>
 		    Set My Location
-		    <i class="icon ion-chevron-right"></i>
+		    <i class="icon" ng-class="{ 'ion-chevron-right': !storage.location.done, 'ion-checkmark-round': storage.location.done }"></i>
 		  </a>
 
-		  <a class="item item-icon-left item-icon-right" href="#">
+		  <a class="item item-icon-left item-icon-right" href="#/activity-filter">
 		    <i class="icon ion-ios-basketball"></i>
 		    Filter By Activities
 		    <i class="icon ion-chevron-right"></i>
 		  </a>
 
-		  <a class="item item-icon-left item-icon-right" href="#">
+		  <a class="item item-icon-left item-icon-right" href="#/park-selection">
 		    <i class="icon fa fa-tree"></i>
 		    Select a Park
 		    <i class="icon ion-chevron-right"></i>
