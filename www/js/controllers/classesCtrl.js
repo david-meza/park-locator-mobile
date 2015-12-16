@@ -8,7 +8,7 @@ angular.module('parkLocator').controller('classesCtrl', ['$scope', 'classesServi
     $scope.classes = classesService.classes;
 
     $scope.goToSection = function (section) {
-      $state.go('home.park.section', { sectionName: section });
+      $state.go('tab.park.section', { sectionName: section });
     };
 
     var goToFirst = function () {

@@ -100,7 +100,7 @@ angular.module('parkLocator').controller('parkCtrl', [ '$scope', '$state', '$sta
 				$scope.parks.currentPark = $scope.parks[parkName];
 				return true;
 			} 
-			$state.go('home');
+			$state.go('tab.parkSelection');
 		};
 
 		var displayDirections = function (response, status) {

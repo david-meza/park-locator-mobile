@@ -14,7 +14,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state',
     currentMarker.obj = markers.currentPark = this;
     this.showWindow = (oldID === this.id) ? !this.showWindow : true;
     // Trigger a state change and show the park details
-    $state.go('home.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
+    $state.go('tab.park', { 'name': markers.currentPark.name.replace(/\s+/g, '').toLowerCase() });
   };
 
   var _generateMarkers = function (response) {
